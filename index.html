@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="hi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Kapil Tiwari - ग्राम प्रधान उम्मीदवार</title>
+    <style>
+        /* Reset & base */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #fceabb, #f8b500);
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px 15px;
+            overflow-x: hidden;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 25px;
+            animation: fadeInDown 1s ease forwards;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            color: #4b2e83;
+            margin-bottom: 5px;
+            text-shadow: 1px 1px 6px #ffde59;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #5a3e9d;
+        }
+
+        /* Image container - Fixed to prevent overflow */
+        .candidate-img-container {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 6px solid #f8b500;
+            background: #fff;
+            box-shadow: 0 8px 20px rgba(248, 181, 0, 0.5);
+            margin-bottom: 25px;
+            animation: popIn 1.5s ease forwards;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .candidate-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .candidate-img-container:hover .candidate-img {
+            transform: scale(1.05);
+        }
+
+        section {
+            background: #fff;
+            max-width: 500px;
+            width: 100%;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            animation: fadeInUp 1.5s ease forwards;
+            transition: transform 0.3s ease;
+        }
+
+        section:hover {
+            transform: translateY(-5px);
+        }
+
+        section h2 {
+            color: #4b2e83;
+            margin-bottom: 18px;
+            font-size: 1.8rem;
+            border-bottom: 3px solid #f8b500;
+            padding-bottom: 6px;
+            text-align: center;
+        }
+
+        section p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #444;
+            margin-bottom: 16px;
+            text-align: justify;
+        }
+
+        /* Promises list - Enhanced */
+        ul.promises {
+            list-style: none;
+            padding-left: 0;
+            margin: 25px 0;
+        }
+
+        ul.promises li {
+            position: relative;
+            padding: 12px 15px 12px 45px;
+            /* margin-bottom: 10px; */
+            font-weight: 600;
+            color: #5a3e9d;
+            background-color: rgba(248, 181, 0, 0.1);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        ul.promises li:hover {
+            background-color: rgba(248, 181, 0, 0.2);
+            transform: translateX(5px);
+        }
+
+        ul.promises li::before {
+            content: '✔';
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #f8b500;
+            font-size: 1.3rem;
+            font-weight: bold;
+            animation: pulse 2.5s infinite ease-in-out;
+        }
+
+        /* Contact Button - Enhanced */
+        .contact-btn {
+            display: block;
+            margin: 30px auto 10px;
+            background: linear-gradient(135deg, #4b2e83, #6f4bb2);
+            color: #fff;
+            font-weight: 700;
+            font-size: 1.2rem;
+            padding: 16px 0;
+            width: 100%;
+            border-radius: 40px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 8px 15px rgba(75, 46, 131, 0.5);
+            transition: all 0.3s ease;
+            user-select: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 20px rgba(75, 46, 131, 0.7);
+        }
+
+        .contact-btn:active {
+            transform: translateY(1px);
+        }
+
+        .contact-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .contact-btn:hover::after {
+            opacity: 1;
+        }
+
+        /* Footer - Enhanced */
+        footer {
+            margin-top: 40px;
+            font-size: 0.9rem;
+            color: #5a3e9d;
+            text-align: center;
+            opacity: 0.8;
+            padding: 15px;
+            width: 100%;
+            max-width: 500px;
+            border-top: 1px solid rgba(248, 181, 0, 0.3);
+        }
+
+        /* Floating decorative elements */
+        .floating-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .floating-element {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            animation: float 15s infinite linear;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes popIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: translateY(-50%) scale(1);
+            }
+
+            50% {
+                transform: translateY(-50%) scale(1.1);
+            }
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            100% {
+                transform: translateY(-1000px) rotate(720deg);
+            }
+        }
+
+        /* Responsive design */
+        @media (max-width: 500px) {
+            header h1 {
+                font-size: 2rem;
+            }
+
+            section {
+                padding: 25px 20px;
+            }
+
+            section h2 {
+                font-size: 1.5rem;
+            }
+
+            section p,
+            ul.promises li {
+                font-size: 1rem;
+            }
+
+            .candidate-img-container {
+                width: 160px;
+                height: 160px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            section {
+                padding: 20px 15px;
+            }
+
+            .contact-btn {
+                font-size: 1.1rem;
+                padding: 14px 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="floating-elements">
+        <div class="floating-element" style="width: 100px; height: 100px; top: 20%; left: 10%; animation-delay: 0s;">
+        </div>
+        <div class="floating-element" style="width: 150px; height: 150px; top: 60%; left: 70%; animation-delay: 3s;">
+        </div>
+        <div class="floating-element" style="width: 80px; height: 80px; top: 80%; left: 20%; animation-delay: 6s;">
+        </div>
+    </div>
+
+    <header>
+        <h1>कपिल तिवारी</h1>
+        <p>ग्राम-प्रधान उम्मीदवार</p>
+    </header>
+
+    <div class="candidate-img-container" aria-label="Candidate Image" title="कपिल तिवारी">
+        <img src="./photo-photoaidcom-cropped.png" alt="Kapil Election Photo" class="candidate-img">
+    </div>
+
+    <section>
+        <h2>हमारा संकल्प</h2>
+        <p>मैं कपिल तिवारी, ग्राम पंचायत पटलगांव के लिए काम करने का वचन देता हूँ। युवा ऊर्जा और ईमानदारी के साथ, हम गाँव
+            को नई
+            ऊँचाइयों पर ले जाएंगे। मेरा उद्देश्य ग्राम पंचायत के विकास के लिए पारदर्शी और प्रभावी नेतृत्व प्रदान करना
+            है।</p>
+
+        <ul class="promises">
+            <li>सड़क और पानी की सुविधाओं में सुधार</li>
+            <li>स्कूल और स्वास्थ्य केंद्रों को बेहतर बनाना</li>
+            <li>रोजगार के अवसर बढ़ाना</li>
+            <li>युवाओं के लिए विकास योजनाएँ</li>
+            <li>किसानों के लिए बेहतर सुविधाएँ</li>
+            <li>महिला सशक्तिकरण कार्यक्रम</li>
+        </ul>
+
+        <button class="contact-btn" onclick="contactKapil()">
+            संपर्क करें (WhatsApp)
+        </button>
+    </section>
+
+    <footer>
+        &copy; 2025 कपिल तिवारी | पाटलगांव पंचायत
+    </footer>
+
+    <script>
+        function contactKapil() {
+            const whatsappNumber = "8393893067"; // Replace with actual number including country code
+            const message = encodeURIComponent(
+                "नमस्ते कपिल जी, मैं आपके समर्थन में हूँ। गाँव के विकास के बारे में चर्चा करना चाहूँगा/चाहूँगी।");
+            window.open(`https://wa.me/${whatsappNumber}?text=${message}`, "_blank");
+        }
+
+        // Create additional floating elements dynamically
+        document.addEventListener('DOMContentLoaded', function () {
+            const floatingContainer = document.querySelector('.floating-elements');
+            for (let i = 0; i < 5; i++) {
+                const element = document.createElement('div');
+                element.className = 'floating-element';
+                const size = Math.random() * 60 + 40;
+                const posX = Math.random() * 100;
+                const posY = Math.random() * 100;
+                const delay = Math.random() * 10;
+                const duration = Math.random() * 10 + 10;
+
+                element.style.width = `${size}px`;
+                element.style.height = `${size}px`;
+                element.style.top = `${posY}%`;
+                element.style.left = `${posX}%`;
+                element.style.animationDelay = `${delay}s`;
+                element.style.animationDuration = `${duration}s`;
+
+                floatingContainer.appendChild(element);
+            }
+        });
+    </script>
+</body>
+
+</html>
